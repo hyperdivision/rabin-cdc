@@ -133,21 +133,13 @@ int rabin_next_chunk(struct rabin_t *h, uint8_t *buf, unsigned int len) {
     return -1;
 }
 
-struct rabin_t *rabin_init(void) {
+void rabin_init(struct rabin_t *h) {
     if (!tables_initialized) {
         calc_tables();
         tables_initialized = true;
     }
 
-    struct rabin_t *h;
-
-    if ((h = malloc(sizeof(struct rabin_t))) == NULL) {
-        errx(1, "malloc()");
-    }
-
     rabin_reset(h);
-
-    return h;
 }
 
 

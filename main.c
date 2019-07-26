@@ -9,8 +9,8 @@ uint8_t buf[1024*1024];
 size_t bytes;
 
 int main(void) {
-    struct rabin_t *hash;
-    hash = rabin_init();
+    struct rabin_t hash;
+    rabin_init(&hash);
 
     unsigned int chunks = 0;
 
@@ -21,7 +21,7 @@ int main(void) {
         bytes += len;
 
         while (1) {
-            int remaining = rabin_next_chunk(hash, ptr, len);
+            int remaining = rabin_next_chunk(&hash, ptr, len);
 
             if (remaining < 0) {
                 break;
@@ -38,7 +38,7 @@ int main(void) {
         }
     }
 
-    if (rabin_finalize(hash) != NULL) {
+    if (rabin_finalize(&hash) != NULL) {
         chunks++;
         printf("%d %016llx\n",
             last_chunk.length,

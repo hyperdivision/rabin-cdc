@@ -27,7 +27,7 @@ struct chunk_t {
 
 extern struct chunk_t last_chunk;
 
-struct rabin_t *rabin_init(void);
+void rabin_init(struct rabin_t *h);
 void rabin_reset(struct rabin_t *h);
 void rabin_slide(struct rabin_t *h, uint8_t b);
 void rabin_append(struct rabin_t *h, uint8_t b);
