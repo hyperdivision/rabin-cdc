@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include "rabin.h"
 
-#define MASK ((1<<AVERAGE_BITS)-1)
 #define POL_SHIFT (POLYNOMIAL_DEGREE-8)
 
 struct chunk_t last_chunk;
@@ -115,7 +114,7 @@ int rabin_next_chunk(struct rabin_t *h, uint8_t *buf, unsigned int len) {
         h->count++;
         h->pos++;
 
-        if ((h->count >= MINSIZE && ((h->digest & MASK) == 0)) || h->count >= MAXSIZE) {
+        if ((h->count >= h->minsize && ((h->digest & h->mask) == 0)) || h->count >= h->maxsize) {
             last_chunk.start = h->start;
             last_chunk.length = h->count;
             last_chunk.cut_fingerprint = h->digest;

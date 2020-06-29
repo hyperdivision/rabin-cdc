@@ -6,11 +6,12 @@
 #define POLYNOMIAL 0x3DA3358B4DC173LL
 #define POLYNOMIAL_DEGREE 53
 #define WINSIZE 64
-#define AVERAGE_BITS 20
-#define MINSIZE (512*1024)
-#define MAXSIZE (8*1024*1024)
 
 struct rabin_t {
+    size_t minsize;
+    size_t maxsize;
+    uint64_t mask;
+
     uint8_t window[WINSIZE];
     unsigned int wpos;
     unsigned int count;

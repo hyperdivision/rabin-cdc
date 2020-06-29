@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include "rabin.h"
 
+#define AVERAGE_BITS 20
+
 // 1MiB buffer
 uint8_t buf[1024*1024];
 size_t bytes;
@@ -11,6 +13,10 @@ size_t bytes;
 int main(void) {
     struct rabin_t hash;
     rabin_init(&hash);
+
+    hash.minsize = (512*1024);
+    hash.maxsize = (8*1024*1024);
+    hash.mask = (1 << AVERAGE_BITS) - 1;
 
     unsigned int chunks = 0;
 
